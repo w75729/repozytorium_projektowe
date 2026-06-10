@@ -84,14 +84,27 @@ bookForm.addEventListener("submit", async function (event) {
 });
 
 searchInput.addEventListener("input", function () {
-    bookList.innerHTML = "<p>Wyszukiwanie zostanie dodane w kolejnym etapie.</p>";
+    const searchText = searchInput.value.trim().toLowerCase();
+
+    const filteredBooks = books.filter(function (book) {
+        const title = book.title.toLowerCase();
+        const author = book.author.toLowerCase();
+
+        return title.includes(searchText) || author.includes(searchText);
+    });
+
+    displayBooks(filteredBooks);
 });
 
 function displayBooks(bookArray) {
     bookList.innerHTML = "";
 
     if (bookArray.length === 0) {
-        bookList.innerHTML = "<p>Brak ksiazek w bazie.</p>";
+        if (searchInput.value.trim() !== "") {
+            bookList.innerHTML = "<p>Nie znaleziono ksiazek.</p>";
+        } else {
+            bookList.innerHTML = "<p>Brak ksiazek w bazie.</p>";
+        }
         return;
     }
 
