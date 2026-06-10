@@ -106,6 +106,20 @@ function displayBooks(bookArray) {
             <p>Gatunek: ${book.genre || "brak danych"}</p>
         `;
 
+        bookItem.addEventListener("click", function () {
+            showBookDetails(book);
+        });
+
         bookList.appendChild(bookItem);
     });
+}
+
+function showBookDetails(book) {
+    bookDetails.innerHTML = `
+        <h3>${book.title}</h3>
+        <p>Autor: ${book.author}</p>
+        <p>Rok wydania: ${book.year || "brak danych"}</p>
+        <p>Gatunek: ${book.genre || "brak danych"}</p>
+        <p>Opis: ${book.description || "brak opisu"}</p>
+    `;
 }
