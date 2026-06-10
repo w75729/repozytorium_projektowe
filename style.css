@@ -5,18 +5,23 @@ body {
     margin: 0;
     background-color: #f5f1ea;
     color: #222;
+    line-height: 1.5;
 }
 
 header {
     background-color: #6b3f25;
     color: white;
     text-align: center;
-    padding: 25px;
+    padding: 30px 15px;
+}
+
+header p {
+    margin-bottom: 0;
 }
 
 main {
     max-width: 900px;
-    margin: 20px auto;
+    margin: 25px auto;
     padding: 0 15px;
 }
 
@@ -25,6 +30,8 @@ section {
     margin-bottom: 20px;
     padding: 20px;
     border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 h1,
@@ -32,17 +39,45 @@ h2 {
     margin-top: 0;
 }
 
+h1 {
+    margin-bottom: 8px;
+}
+
+h2 {
+    color: #6b3f25;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
 form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
 }
 
 input,
 textarea,
 button {
     font: inherit;
-    padding: 8px;
+    padding: 10px;
+}
+
+input,
+textarea {
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #6b3f25;
+    box-shadow: 0 0 0 2px rgba(107, 63, 37, 0.15);
 }
 
 button {
@@ -50,6 +85,7 @@ button {
     background-color: #6b3f25;
     color: white;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -57,8 +93,76 @@ button:hover {
     background-color: #4f2d1a;
 }
 
+#form-message {
+    min-height: 20px;
+    margin: 8px 0 0;
+    color: #6b3f25;
+}
+
+#search {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#book-list,
+#book-details {
+    min-height: 60px;
+}
+
+#book-list p,
+#book-details p {
+    margin-bottom: 0;
+}
+
+.book-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+.book-item h3 {
+    margin: 0 0 5px;
+    color: #333;
+}
+
+.book-item p {
+    margin: 4px 0;
+}
+
 footer {
     text-align: center;
     padding: 15px;
     color: #555;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 22px 12px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    main {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    input,
+    textarea,
+    button {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
