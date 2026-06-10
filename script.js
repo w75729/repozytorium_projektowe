@@ -29,7 +29,7 @@ const bookList = document.getElementById("book-list");
 const bookDetails = document.getElementById("book-details");
 const formMessage = document.getElementById("form-message");
 
-const books = [];
+let books = [];
 
 onValue(connectedRef, function (snapshot) {
     if (snapshot.val() === true) {
@@ -37,6 +37,18 @@ onValue(connectedRef, function (snapshot) {
     } else {
         console.log("Brak polaczenia z Firebase Realtime Database.");
     }
+});
+
+onValue(booksRef, function (snapshot) {
+    books = [];
+
+    snapshot.forEach(function (childSnapshot) {
+        const book = childSnapshot.val();
+        book.id = childSnapshot.key;
+        books.push(book);
+    });
+
+    displayBooks(books);
 });
 
 bookForm.addEventListener("submit", async function (event) {
@@ -74,3 +86,26 @@ bookForm.addEventListener("submit", async function (event) {
 searchInput.addEventListener("input", function () {
     bookList.innerHTML = "<p>Wyszukiwanie zostanie dodane w kolejnym etapie.</p>";
 });
+
+function displayBooks(bookArray) {
+    bookList.innerHTML = "";
+
+    if (bookArray.length === 0) {
+        bookList.innerHTML = "<p>Brak ksiazek w bazie.</p>";
+        return;
+    }
+
+    bookArray.forEach(function (book) {
+        const bookItem = document.createElement("div");
+        bookItem.className = "book-item";
+
+        bookItem.innerHTML = `
+            <h3>${book.title}</h3>
+            <p>Autor: ${book.author}</p>
+            <p>Rok: ${book.year || "brak danych"}</p>
+            <p>Gatunek: ${book.genre || "brak danych"}</p>
+        `;
+
+        bookList.appendChild(bookItem);
+    });
+}
