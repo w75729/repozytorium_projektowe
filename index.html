@@ -15,41 +15,42 @@
     </header>
 
     <main>
-        <section>
+        <section id="add-book-section">
             <h2>Dodaj ksiazke</h2>
             <form id="book-form">
                 <label for="title">Tytul</label>
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" placeholder="Np. Lalka">
 
                 <label for="author">Autor</label>
-                <input type="text" id="author" name="author">
+                <input type="text" id="author" name="author" placeholder="Np. Boleslaw Prus">
 
                 <label for="year">Rok wydania</label>
-                <input type="number" id="year" name="year">
+                <input type="number" id="year" name="year" placeholder="Np. 1890">
 
                 <label for="genre">Gatunek</label>
-                <input type="text" id="genre" name="genre">
+                <input type="text" id="genre" name="genre" placeholder="Np. powiesc">
 
                 <label for="description">Opis</label>
-                <textarea id="description" name="description" rows="4"></textarea>
+                <textarea id="description" name="description" rows="4" placeholder="Krotki opis ksiazki"></textarea>
 
                 <button type="submit">Dodaj</button>
+                <p id="form-message"></p>
             </form>
         </section>
 
-        <section>
+        <section id="search-section">
             <h2>Wyszukaj ksiazke</h2>
             <input type="text" id="search" placeholder="Wpisz tytul lub autora">
         </section>
 
-        <section>
+        <section id="book-list-section">
             <h2>Lista ksiazek</h2>
-            <div id="book-list">
+            <div id="book-list" aria-live="polite">
                 <p>Lista ksiazek pojawi sie tutaj.</p>
             </div>
         </section>
 
-        <section>
+        <section id="book-details-section">
             <h2>Szczegoly ksiazki</h2>
             <div id="book-details">
                 <p>Wybierz ksiazke z listy, aby zobaczyc szczegoly.</p>
