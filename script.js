@@ -1,7 +1,7 @@
 // Numer indeksu: 75729 | Furkan Akgun
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAPTHZ4fE4H88Pjt7ZiAv_IVk0WeHhc4gs",
@@ -134,5 +134,24 @@ function showBookDetails(book) {
         <p>Rok wydania: ${book.year || "brak danych"}</p>
         <p>Gatunek: ${book.genre || "brak danych"}</p>
         <p>Opis: ${book.description || "brak opisu"}</p>
+        <button id="delete-book-button" type="button">Usun ksiazke</button>
     `;
+
+    const deleteButton = document.getElementById("delete-book-button");
+
+    deleteButton.addEventListener("click", function () {
+        deleteBook(book.id);
+    });
+}
+
+async function deleteBook(bookId) {
+    const bookRef = ref(database, "books/" + bookId);
+
+    try {
+        await remove(bookRef);
+        bookDetails.innerHTML = "<p>Ksiazka zostala usunieta.</p>";
+    } catch (error) {
+        bookDetails.innerHTML = "<p>Nie udalo sie usunac ksiazki.</p>";
+        console.error(error);
+    }
 }
