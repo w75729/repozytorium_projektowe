@@ -1,7 +1,7 @@
 // Numer indeksu: 75729 | Furkan Akgun
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAPTHZ4fE4H88Pjt7ZiAv_IVk0WeHhc4gs",
@@ -16,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const connectedRef = ref(database, ".info/connected");
+const booksRef = ref(database, "books");
 
 const bookForm = document.getElementById("book-form");
 const titleInput = document.getElementById("title");
@@ -38,10 +39,36 @@ onValue(connectedRef, function (snapshot) {
     }
 });
 
-bookForm.addEventListener("submit", function (event) {
+bookForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    formMessage.textContent = "Polaczenie z Firebase jest przygotowane. Dodawanie ksiazek bedzie w kolejnym etapie.";
+    const title = titleInput.value.trim();
+    const author = authorInput.value.trim();
+    const year = yearInput.value.trim();
+    const genre = genreInput.value.trim();
+    const description = descriptionInput.value.trim();
+
+    if (title === "" || author === "") {
+        formMessage.textContent = "Uzupelnij tytul i autora ksiazki.";
+        return;
+    }
+
+    const book = {
+        title: title,
+        author: author,
+        year: year,
+        genre: genre,
+        description: description
+    };
+
+    try {
+        await push(booksRef, book);
+        formMessage.textContent = "Ksiazka zostala zapisana w Firebase.";
+        bookForm.reset();
+    } catch (error) {
+        formMessage.textContent = "Nie udalo sie zapisac ksiazki.";
+        console.error(error);
+    }
 });
 
 searchInput.addEventListener("input", function () {
