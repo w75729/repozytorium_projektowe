@@ -24,7 +24,7 @@ Aplikacja pozwala dodawac ksiazki do bazy danych, wyswietlac liste ksiazek, spra
 - pobieranie ksiazek z Firebase,
 - wyswietlanie listy ksiazek,
 - wyswietlanie szczegolow ksiazki,
-- usuwanie ksiazki,
+- usuwanie ksiazek,
 - wyszukiwanie po tytule lub autorze,
 - prosta walidacja formularza.
 
@@ -46,8 +46,9 @@ Kazda ksiazka zawiera:
 
 ## Instrukcja uruchomienia
 
-1. Pobierz albo sklonuj repozytorium.
-2. Otworz plik `index.html` w przegladarce.
+1. Otworz strone przez GitHub Pages:
+   https://w75729.github.io/repozytorium_projektowe/
+2. Mozesz tez pobrac albo sklonowac repozytorium i otworzyc plik `index.html` w przegladarce.
 3. Upewnij sie, ze komputer ma dostep do internetu, poniewaz aplikacja laczy sie z Firebase.
 4. Dodaj ksiazke przez formularz i sprawdz, czy pojawia sie na liscie.
 
