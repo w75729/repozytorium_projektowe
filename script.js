@@ -1,5 +1,22 @@
 // Numer indeksu: 75729 | Furkan Akgun
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAPTHZ4fE4H88Pjt7ZiAv_IVk0WeHhc4gs",
+    authDomain: "antykwariat-akgun.firebaseapp.com",
+    databaseURL: "https://antykwariat-akgun-default-rtdb.firebaseio.com",
+    projectId: "antykwariat-akgun",
+    storageBucket: "antykwariat-akgun.firebasestorage.app",
+    messagingSenderId: "117410764064",
+    appId: "1:117410764064:web:d0ca9599bcb011750b7345"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const connectedRef = ref(database, ".info/connected");
+
 const bookForm = document.getElementById("book-form");
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
@@ -13,10 +30,18 @@ const formMessage = document.getElementById("form-message");
 
 const books = [];
 
+onValue(connectedRef, function (snapshot) {
+    if (snapshot.val() === true) {
+        console.log("Polaczono z Firebase Realtime Database.");
+    } else {
+        console.log("Brak polaczenia z Firebase Realtime Database.");
+    }
+});
+
 bookForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    formMessage.textContent = "Dodawanie ksiazek zostanie uruchomione w kolejnym etapie.";
+    formMessage.textContent = "Polaczenie z Firebase jest przygotowane. Dodawanie ksiazek bedzie w kolejnym etapie.";
 });
 
 searchInput.addEventListener("input", function () {
